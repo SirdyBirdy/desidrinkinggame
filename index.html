@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Sharaabi Shaam — Desi Party Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- SPLASH SCREEN -->
+  <div id="screen-splash" class="screen active">
+    <div class="splash-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <div class="splash-content">
+      <div class="logo-wrap">
+        <div class="logo-icon">🥂</div>
+        <h1 class="logo-title">Sharaabi<br>Shaam</h1>
+        <p class="logo-sub">A desi drinking game for legends</p>
+      </div>
+
+      <div class="risque-toggle-wrap">
+        <div class="risque-toggle-card">
+          <div class="risque-info">
+            <span class="risque-label">🔥 Risque Mode</span>
+            <span class="risque-desc">Spicy questions unlock</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="risque-toggle">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </div>
+
+      <p class="pick-label">Pick your poison</p>
+
+      <div class="game-cards">
+        <button class="game-card" onclick="openGame('never-have-i-ever')" style="--card-color:#FF6B35;--card-light:#FFF0EA">
+          <span class="game-icon">🍹</span>
+          <div class="game-info">
+            <span class="game-name">Never Have I Ever</span>
+            <span class="game-tag">Desi Edition</span>
+          </div>
+          <span class="game-arrow">→</span>
+        </button>
+
+        <button class="game-card" onclick="openGame('majority-rules')" style="--card-color:#7B2FF7;--card-light:#F0EAFF">
+          <span class="game-icon">🗳️</span>
+          <div class="game-info">
+            <span class="game-name">Majority Rules</span>
+            <span class="game-tag">Vote &amp; Drink</span>
+          </div>
+          <span class="game-arrow">→</span>
+        </button>
+
+        <button class="game-card" onclick="openGame('bollywood-blitz')" style="--card-color:#00C9A7;--card-light:#E6FAF7">
+          <span class="game-icon">🎬</span>
+          <div class="game-info">
+            <span class="game-name">Bollywood Blitz</span>
+            <span class="game-tag">Speed Trivia</span>
+          </div>
+          <span class="game-arrow">→</span>
+        </button>
+      </div>
+
+      <p class="footer-txt">Drink responsibly. Or don't. Your choice.</p>
+    </div>
+  </div>
+
+
+  <!-- NEVER HAVE I EVER -->
+  <div id="screen-never-have-i-ever" class="screen game-screen" data-color="#FF6B35">
+    <div class="game-header" style="--gh-color:#FF6B35">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div class="header-text">
+        <span class="header-title">Never Have I Ever</span>
+        <span class="header-sub">Desi Edition</span>
+      </div>
+      <div class="card-count-badge" id="nhie-count"></div>
+    </div>
+
+    <div class="game-body">
+      <div class="card-stack" id="nhie-stack">
+        <div class="swipe-card" id="nhie-card" style="--c:#FF6B35">
+          <div class="card-inner">
+            <div class="card-top-label">Never have I ever...</div>
+            <p class="card-text" id="nhie-text">Loading...</p>
+            <div class="card-bottom">
+              <span class="drink-rule">Anyone who HAS done this → DRINK 🍺</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-shadow-2" style="background:#FF6B35"></div>
+        <div class="card-shadow-3" style="background:#FF6B35"></div>
+      </div>
+
+      <div class="action-row">
+        <button class="dare-btn" onclick="showSpinBottle()">🍾 Spin the Bottle</button>
+        <button class="next-btn" onclick="nextCard('nhie')" style="--btn-color:#FF6B35">Next Card →</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MAJORITY RULES -->
+  <div id="screen-majority-rules" class="screen game-screen" data-color="#7B2FF7">
+    <div class="game-header" style="--gh-color:#7B2FF7">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div class="header-text">
+        <span class="header-title">Majority Rules</span>
+        <span class="header-sub">Vote &amp; Drink</span>
+      </div>
+      <div class="card-count-badge" id="mr-count"></div>
+    </div>
+
+    <div class="game-body">
+      <div class="question-card" style="--c:#7B2FF7">
+        <div class="q-label">Point at who...</div>
+        <p class="q-text" id="mr-text">Loading...</p>
+        <div class="q-rule">The person with the MOST fingers pointed at them → DRINK 🍸</div>
+      </div>
+
+      <div class="action-row">
+        <button class="dare-btn" onclick="showSpinBottle()">🍾 Spin the Bottle</button>
+        <button class="next-btn" onclick="nextCard('mr')" style="--btn-color:#7B2FF7">Next Round →</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- BOLLYWOOD BLITZ -->
+  <div id="screen-bollywood-blitz" class="screen game-screen" data-color="#00C9A7">
+    <div class="game-header" style="--gh-color:#00C9A7">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div class="header-text">
+        <span class="header-title">Bollywood Blitz</span>
+        <span class="header-sub">Speed Trivia</span>
+      </div>
+      <div class="card-count-badge" id="bb-count"></div>
+    </div>
+
+    <div class="game-body">
+      <div class="timer-ring-wrap">
+        <svg class="timer-ring" viewBox="0 0 80 80" id="bb-ring-svg">
+          <circle class="ring-track" cx="40" cy="40" r="34"/>
+          <circle class="ring-fill" cx="40" cy="40" r="34" id="bb-ring-fill"/>
+        </svg>
+        <span class="timer-num" id="bb-timer">15</span>
+      </div>
+
+      <div class="trivia-card" style="--c:#00C9A7">
+        <p class="trivia-q" id="bb-text">Loading...</p>
+      </div>
+
+      <div class="answer-reveal hidden" id="bb-answer-wrap">
+        <div class="answer-box">
+          <span class="answer-label">Answer 🎯</span>
+          <p id="bb-answer-text"></p>
+        </div>
+      </div>
+
+      <div class="action-row bb-actions">
+        <button class="reveal-btn hidden" id="bb-reveal-btn" onclick="revealAnswer()" style="--btn-color:#00C9A7">Reveal Answer</button>
+        <button class="start-timer-btn" id="bb-start-btn" onclick="startBlitzTimer()" style="--btn-color:#00C9A7">Start Timer ▶</button>
+        <button class="next-btn" onclick="nextCard('bb')" style="--btn-color:#00C9A7">Next Question →</button>
+      </div>
+
+      <button class="dare-btn" style="width:100%;margin-top:-8px" onclick="showSpinBottle()">🍾 Spin the Bottle — Dare</button>
+
+      <div class="blitz-rule">
+        No answer in time → everyone DRINKS 🥃 · Correct → picker stays dry 😎
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- GLOBAL SPIN THE BOTTLE MODAL -->
+<div class="spin-overlay hidden" id="spin-overlay">
+  <div class="spin-modal">
+    <button class="spin-close-x" onclick="closeSpinBottle()">✕</button>
+
+    <div class="spin-phase" id="spin-phase-spin">
+      <p class="spin-title">Spin the Bottle 🍾</p>
+      <p class="spin-sub">Whoever it lands on does the dare</p>
+      <div class="bottle-wrap">
+        <div class="bottle-emoji" id="bottle-emoji">🍾</div>
+      </div>
+      <button class="spin-btn" id="spin-btn" onclick="spinBottle()">Spin!</button>
+    </div>
+
+    <div class="spin-phase hidden" id="spin-phase-dare">
+      <p class="spin-title">🎯 Dare!</p>
+      <p class="spin-sub" id="spin-landed-text">It landed on you...</p>
+      <div class="dare-card-box">
+        <p id="spin-dare-text"></p>
+      </div>
+      <div class="spin-phase-btns">
+        <button class="spin-again-btn" onclick="spinAgain()">Spin Again 🔄</button>
+        <button class="spin-done-btn" onclick="closeSpinBottle()">Done ✓</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="content.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
